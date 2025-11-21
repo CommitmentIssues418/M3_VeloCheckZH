@@ -1,0 +1,37 @@
+# Byte-compiled / optimierte Dateien
+__pycache__/
+*.py[cod]
+
+# C-Erweiterungen
+*.so
+
+# Jupyter Notebook Checkpoints
+.ipynb_checkpoints/
+
+# Virtuelle Umgebungen
+venv/
+.env/
+.env.*
+
+# Distribution / Packaging
+build/
+dist/
+eggs/
+*.egg-info/
+
+# IDEs & Editoren
+.vscode/
+.idea/
+
+# Test / Coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.coverage.*
+
+# System-Dateien
+.DS_Store
+
+# Logs
+*.log
