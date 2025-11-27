@@ -47,15 +47,13 @@ def load_holiday_status():
     if "created_date" in holidays.columns:
         holidays = holidays.drop(columns=["created_date"])
 
-    # Parse as UTC (tz-aware)
-    holidays["Startdatum"] = pd.to_datetime(holidays["start_date"], utc=True)
-    holidays["Enddatum"] = pd.to_datetime(holidays["end_date"], utc=True)
+    # Parse as UTC, then make tz-naive
+    holidays["Startdatum"] = pd.to_datetime(holidays["start_date"], utc=True).dt.tz_localize(None)
+    holidays["Enddatum"] = pd.to_datetime(holidays["end_date"], utc=True).dt.tz_localize(None)
     holidays = holidays.drop(columns=["summary", "start_date", "end_date"])
 
-    # Create daily date range also in UTC so types match
-    all_dates = pd.date_range(
-        start="2022-01-01", end="2024-12-31", freq="D", tz="UTC"
-    )
+    # Create daily date range as tz-naive (default)
+    all_dates = pd.date_range(start="2022-01-01", end="2024-12-31", freq="D")
     holiday_status = pd.DataFrame({"Datum": all_dates})
     holiday_status["is_holiday"] = False
     holiday_status["Zeitstempel"] = holiday_status["Datum"]
@@ -69,6 +67,7 @@ def load_holiday_status():
         holiday_status.loc[mask, "is_holiday"] = True
 
     return holiday_status
+
 
 
 
@@ -185,12 +184,9 @@ def build_model_table(daily_counts, weather, holiday_status):
     )
 
     cols_to_drop = [
-        "Datum",
         "Zeitstempel",      # from weather
         "Velo_In",
         "Velo_Out",
-        "Koord_Ost",
-        "Koord_Nord",
         "Temperatur min",
         "Temperatur max",
     ]
