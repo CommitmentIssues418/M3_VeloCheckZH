@@ -7,3 +7,7 @@ scikit-learn
 matplotlib
 seaborn
 XGBoost
+shap
+jupyter
+notebook
+ipykernel
