@@ -35,3 +35,19 @@ htmlcov/
 
 # Logs
 *.log
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Data
+data/raw/
+data/processed/
+*.csv
+
+# Jupyter
+.ipynb_checkpoints/
+
+# VS Code
+.vscode/
