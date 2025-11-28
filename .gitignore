@@ -43,8 +43,8 @@ __pycache__/
 
 # Data
 data/raw/
-data/processed/
-*.csv
+# data/processed/
+# *.csv
 
 # Jupyter
 .ipynb_checkpoints/
