@@ -119,12 +119,16 @@ def main():
     print(f"    MAE 2024 : {mae_2024:.3f}")
 
     # 5. Save model
-    os.makedirs("../models", exist_ok=True)
-    model_out = "../models/xgb_model_2022_2023.json"
+    # 5. Save model (absolute project-root path for safety)
+    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    models_dir = os.path.join(project_root, "models")
+    os.makedirs(models_dir, exist_ok=True)
+
+    model_out = os.path.join(models_dir, "xgb_model_2022_2023.json")
     model.save_model(model_out)
+
     print(f"[5] Saved XGBoost model to: {model_out}")
 
-    print("Done.")
 
 
 if __name__ == "__main__":
